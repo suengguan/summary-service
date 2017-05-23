@@ -43,6 +43,8 @@ func (this *SummaryService) Get(userId int64) (*model.Summary, error) {
 	if jobCnt > 0 {
 		var allJobStatus []*model.JobStatus
 		var result []byte
+
+		appApi.StatusApi.Init("http://status-service:8080")
 		result, err = appApi.StatusApi.GetAllJobStatus(userId)
 		if err != nil {
 			beego.Debug("get all job status failed!")
